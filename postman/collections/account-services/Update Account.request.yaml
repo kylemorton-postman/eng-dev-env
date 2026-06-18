@@ -1,0 +1,74 @@
+$kind: http-request
+description: Create
+url: "{{baseUrl}}/accounts/:accountNumber/update"
+method: PATCH
+headers:
+  Content-Type: application/json
+  Accept: application/json
+pathVariables:
+  - key: accountNumber
+    value: "{{accountNumber}}"
+    $type: |-
+      {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "value"
+        ]
+      }
+body:
+  type: json
+  content: |-
+    {
+      "name": "New Business Account Name",
+      "currency": "USD",
+      "status": "active"
+    }
+  $type: |-
+    {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "currency": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        }
+      }
+    }
+scripts:
+  - type: afterResponse
+    code: |+
+      const res = pm.response.json();
+
+      pm.test("Status 200 - Account updated", () => {
+          pm.response.to.have.status(200);
+      });
+
+      pm.test("Response confirms update", () => {
+          pm.expect(res.message).to.eql("Account updated successfully");
+      });
+
+      pm.test("Account is active", () => {
+          pm.expect(res.account.status).to.eql("active");
+      });
+
+      pm.test("Account is returned with expected fields", () => {
+          pm.expect(res.account).to.be.an("object");
+          pm.expect(res.account.id).to.be.a("string");
+          pm.expect(res.account.name).to.be.a("string");
+          pm.expect(res.account.currency).to.be.a("string");
+          pm.expect(res.account.status).to.be.a("string");
+          pm.expect(res.account.updated_at).to.be.a("string");
+      });
+
+    language: text/javascript
+examples: ./.resources/Update Account.resources/examples
+order: 3000

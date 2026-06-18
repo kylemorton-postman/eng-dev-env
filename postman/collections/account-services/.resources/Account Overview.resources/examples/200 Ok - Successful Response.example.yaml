@@ -1,0 +1,160 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/accounts/:accountNumber/overview"
+  method: GET
+  headers:
+    x-mock-response-code: "200"
+    Content-Type: application/json
+    Accept: application/json
+  pathVariables:
+    - key: accountNumber
+      value: ACC_867-5309
+      description: "(Required) "
+  body:
+    type: json
+    content: "{}"
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "account": {
+          "id": "ACC-00123",
+          "name": "Primary Business Account",
+          "currency": "USD",
+          "status": "active"
+        },
+        "balance": {
+          "current": 118.51,
+          "available": 118.51,
+          "as_of": "Tue Jul 01 2025 10:36:30 GMT+0000 (Coordinated Universal Time)"
+        },
+        "summary": {
+          "total_transactions": 10,
+          "invoices": 2,
+          "payments": 2,
+          "deposits": 3,
+          "withdrawals": 3
+        },
+        "money": {
+          "in": 167.49,
+          "out": 730.71,
+          "net": -563.22
+        },
+        "recent_transactions": [
+          {
+            "date": "Tue Jul 01 2025 10:36:30 GMT+0000 (Coordinated Universal Time)",
+            "description": "Gerhold Inc",
+            "type": "deposit",
+            "amount": 113.22
+          },
+          {
+            "date": "Tue Jul 01 2025 03:23:16 GMT+0000 (Coordinated Universal Time)",
+            "description": "Carter LLC",
+            "type": "withdrawal",
+            "amount": 60.53
+          },
+          {
+            "date": "Tue Jul 01 2025 03:13:33 GMT+0000 (Coordinated Universal Time)",
+            "description": "Towne and Sons",
+            "type": "withdrawal",
+            "amount": 463.67
+          }
+        ]
+      }
+    $type: |-
+      {
+        "type": "object",
+        "properties": {
+          "account": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "currency": {
+                "type": "string"
+              },
+              "status": {
+                "type": "string"
+              }
+            }
+          },
+          "balance": {
+            "type": "object",
+            "properties": {
+              "current": {
+                "type": "number"
+              },
+              "available": {
+                "type": "number"
+              },
+              "as_of": {
+                "type": "string"
+              }
+            }
+          },
+          "summary": {
+            "type": "object",
+            "properties": {
+              "total_transactions": {
+                "type": "integer"
+              },
+              "invoices": {
+                "type": "integer"
+              },
+              "payments": {
+                "type": "integer"
+              },
+              "deposits": {
+                "type": "integer"
+              },
+              "withdrawals": {
+                "type": "integer"
+              }
+            }
+          },
+          "money": {
+            "type": "object",
+            "properties": {
+              "in": {
+                "type": "number"
+              },
+              "out": {
+                "type": "number"
+              },
+              "net": {
+                "type": "number"
+              }
+            }
+          },
+          "recent_transactions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "date": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                },
+                "amount": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+        }
+      }
+order: 1000

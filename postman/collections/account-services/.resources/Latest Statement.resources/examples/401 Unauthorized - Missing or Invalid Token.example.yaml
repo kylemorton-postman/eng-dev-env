@@ -1,0 +1,48 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/accounts/:accountNumber/statement/latest"
+  method: GET
+  headers:
+    x-mock-response-code: "200"
+    Accept: application/json
+  pathVariables:
+    accountNumber: ACC_867-5309
+  body:
+    type: json
+    content: ""
+response:
+  statusCode: 401
+  statusText: Unauthorized
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "error": {
+          "code": "UNAUTHORIZED",
+          "message": "Authentication is required to access this resource.",
+          "details": "Bearer token is missing or has expired. Please re-authenticate and try again."
+        }
+      }
+    $type: |-
+      {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "object",
+            "properties": {
+              "code": {
+                "type": "string"
+              },
+              "message": {
+                "type": "string"
+              },
+              "details": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+order: 3000

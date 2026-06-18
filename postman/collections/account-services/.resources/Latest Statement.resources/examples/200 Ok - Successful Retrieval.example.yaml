@@ -1,0 +1,151 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/accounts/:accountNumber/statement/latest"
+  method: GET
+  headers:
+    x-mock-response-code: "200"
+    Accept: application/json
+  pathVariables:
+    accountNumber: ACC_867-5309
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "balance": {
+          "opening": 834.85,
+          "closing": 118.51
+        },
+        "money": {
+          "in": 167.49,
+          "out": 730.71
+        },
+        "transactions": [
+          {
+            "date": "Mon Jun 30 2025 15:36:11 GMT+0000 (Coordinated Universal Time)",
+            "description": "Schoen Inc",
+            "type": "invoice",
+            "amount": 253.14,
+            "balance": 451.58
+          },
+          {
+            "date": "Mon Jun 30 2025 13:14:47 GMT+0000 (Coordinated Universal Time)",
+            "description": "Zulauf - Satterfield",
+            "type": "invoice",
+            "amount": 373.16,
+            "balance": 3.16
+          },
+          {
+            "date": "Tue Jul 01 2025 03:13:33 GMT+0000 (Coordinated Universal Time)",
+            "description": "Towne and Sons",
+            "type": "withdrawal",
+            "amount": 463.67,
+            "balance": 279.5
+          },
+          {
+            "date": "Tue Jul 01 2025 02:51:14 GMT+0000 (Coordinated Universal Time)",
+            "description": "Hansen, Pfannerstill and Rath",
+            "type": "payment",
+            "amount": 87.25,
+            "balance": 525.04
+          },
+          {
+            "date": "Tue Jul 01 2025 03:23:16 GMT+0000 (Coordinated Universal Time)",
+            "description": "Carter LLC",
+            "type": "withdrawal",
+            "amount": 60.53,
+            "balance": 638.96
+          },
+          {
+            "date": "Mon Jun 30 2025 23:13:28 GMT+0000 (Coordinated Universal Time)",
+            "description": "Grady - Breitenberg",
+            "type": "payment",
+            "amount": 259.87,
+            "balance": 527.26
+          },
+          {
+            "date": "Tue Jul 01 2025 10:36:30 GMT+0000 (Coordinated Universal Time)",
+            "description": "Gerhold Inc",
+            "type": "deposit",
+            "amount": 113.22,
+            "balance": 900.51
+          },
+          {
+            "date": "Mon Jun 30 2025 22:29:36 GMT+0000 (Coordinated Universal Time)",
+            "description": "Johns and Sons",
+            "type": "deposit",
+            "amount": 101.69,
+            "balance": 513.24
+          },
+          {
+            "date": "Mon Jun 30 2025 12:21:15 GMT+0000 (Coordinated Universal Time)",
+            "description": "Botsford, Schoen and Murazik",
+            "type": "withdrawal",
+            "amount": 874.79,
+            "balance": 854.91
+          },
+          {
+            "date": "Tue Jul 01 2025 03:01:56 GMT+0000 (Coordinated Universal Time)",
+            "description": "Anderson, Leannon and Bogan",
+            "type": "deposit",
+            "amount": 433.28,
+            "balance": 793.46
+          }
+        ]
+      }
+    $type: |-
+      {
+        "type": "object",
+        "properties": {
+          "balance": {
+            "type": "object",
+            "properties": {
+              "opening": {
+                "type": "number"
+              },
+              "closing": {
+                "type": "number"
+              }
+            }
+          },
+          "money": {
+            "type": "object",
+            "properties": {
+              "in": {
+                "type": "number"
+              },
+              "out": {
+                "type": "number"
+              }
+            }
+          },
+          "transactions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "date": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                },
+                "amount": {
+                  "type": "number"
+                },
+                "balance": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+        }
+      }
+order: 1000

@@ -1,0 +1,48 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/accounts/:accountNumber/statement/latest"
+  method: GET
+  headers:
+    x-mock-response-code: "200"
+    Accept: application/json
+  pathVariables:
+    accountNumber: ACC_867-5309
+  body:
+    type: json
+    content: ""
+response:
+  statusCode: 404
+  statusText: Not Found
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "error": {
+          "code": "ACCOUNT_NOT_FOUND",
+          "message": "No account was found matching the provided account number.",
+          "details": "Account number does not exist or has been closed."
+        }
+      }
+    $type: |-
+      {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "object",
+            "properties": {
+              "code": {
+                "type": "string"
+              },
+              "message": {
+                "type": "string"
+              },
+              "details": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+order: 4000

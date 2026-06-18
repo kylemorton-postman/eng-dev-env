@@ -1,0 +1,52 @@
+$kind: http-request
+description: Latest
+url: "{{baseUrl}}/accounts/:accountNumber/statement/latest"
+method: GET
+headers:
+  - key: x-mock-response-code
+    value: "200"
+    $type: integer
+  - key: Accept
+    value: application/json
+pathVariables:
+  - key: accountNumber
+    value: "{{accountNumber}}"
+    $type: |-
+      {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "value"
+        ]
+      }
+scripts:
+  - type: afterResponse
+    code: |-
+      const res = pm.response.json();
+
+      pm.test("Status 200 - Got a statement", () => {
+          pm.response.to.have.status(200);
+      });
+
+      pm.test("Statement has a balance", () => {
+          pm.expect(res.balance.opening).to.be.a("number");
+          pm.expect(res.balance.closing).to.be.a("number");
+      });
+
+      pm.test("Statement has transactions", () => {
+          pm.expect(res.transactions.length).to.be.above(0);
+      });
+
+      pm.test("Statement is returned with expected fields (just schema validation, not 'Contract Testing')", () => {
+          pm.expect(res.balance).to.be.an("object");
+          pm.expect(res.balance.opening).to.be.a("number");
+          pm.expect(res.balance.closing).to.be.a("number");
+          pm.expect(res.transactions).to.be.an("array");
+      });
+    language: text/javascript
+examples: ./.resources/Latest Statement.resources/examples
+order: 1000
