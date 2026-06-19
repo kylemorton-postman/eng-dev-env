@@ -2,4 +2,3 @@ $kind: collection
 name: account-services
 variables:
   accountNumber: ACC_867-5309
-  baseUrl: "{{baseUrl}}"
