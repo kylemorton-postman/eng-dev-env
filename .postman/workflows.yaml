@@ -8,13 +8,13 @@ workflows:
     - spec: ../index.yaml
       collection: ../postman/collections/account-services
       options:
-        syncExamples: false
+        syncExamples: true
         folderStrategy: Tags
         nestedFolderHierarchy: true
   syncCollectionToSpec:
     - spec: ../index.yaml
       collection: ../postman/collections/account-services
       options:
-        syncExamples: false
+        syncExamples: true
         folderStrategy: Tags
         nestedFolderHierarchy: true

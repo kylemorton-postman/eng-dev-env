@@ -1,0 +1,32 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/accounts/:accountNumber/create"
+  method: POST
+  pathVariables:
+    accountNumber: ACC_867-5309
+  body:
+    type: json
+    content: |-
+      {
+        "holder": "{{customerId}}",
+        "type": "Money Market Account"
+      }
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+          "message": "Account created successfully",
+          "account": {
+              "id": "ACC-00124",
+              "name": "Secondary Business Account",
+              "currency": "USD",
+              "status": "active",
+              "created_at": "Tue Jul 01 2025 10:36:30 GMT+0000 (Coordinated Universal Time)"
+          }
+      }
+order: 1000

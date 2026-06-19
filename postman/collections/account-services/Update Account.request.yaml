@@ -1,6 +1,6 @@
 $kind: http-request
 description: Create
-url: "{{baseUrl}}/accounts/:accountNumber/update"
+url: ://{{baseUrl}}/accounts/:accountNumber/update
 method: PATCH
 headers:
   Content-Type: application/json
@@ -13,7 +13,8 @@ pathVariables:
         "type": "object",
         "properties": {
           "value": {
-            "type": "string"
+            "type": "string",
+            "default": "<string>"
           }
         },
         "required": [

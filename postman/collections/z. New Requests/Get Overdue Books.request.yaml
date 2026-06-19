@@ -1,0 +1,8 @@
+$kind: http-request
+url: "{{mockUrl}}/books/overdue"
+method: GET
+headers:
+  Accept: application/json
+  x-mock-response-code: "200"
+examples: ./.resources/Get Overdue Books.resources/examples
+order: 3000

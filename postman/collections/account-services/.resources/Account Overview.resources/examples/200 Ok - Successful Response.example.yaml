@@ -1,6 +1,6 @@
 $kind: http-example
 request:
-  url: "{{baseUrl}}/accounts/:accountNumber/overview"
+  url: ://{{baseUrl}}/accounts/:accountNumber/overview
   method: GET
   headers:
     x-mock-response-code: "200"
@@ -19,7 +19,7 @@ response:
   headers:
     Content-Type: application/json
   body:
-    type: json
+    type: text
     content: |-
       {
         "account": {

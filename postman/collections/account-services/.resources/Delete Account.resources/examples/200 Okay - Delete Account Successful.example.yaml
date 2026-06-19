@@ -1,6 +1,6 @@
 $kind: http-example
 request:
-  url: "{{baseUrl}}/accounts/:accountNumber/delete"
+  url: ://{{baseUrl}}/accounts/:accountNumber/delete
   method: DELETE
   headers:
     Content-Type: application/json
@@ -21,7 +21,7 @@ response:
   headers:
     Content-Type: application/json
   body:
-    type: json
+    type: text
     content: |-
       {
         "account": {

@@ -1,0 +1,43 @@
+$kind: http-request
+description: Create
+url: "{{baseUrl}}/accounts/:accountNumber/create"
+method: POST
+headers:
+  Content-Type: application/json
+pathVariables:
+  accountNumber: "{{accountNumber}}"
+body:
+  type: json
+  content: |-
+    {
+        "name": "Secondary Business Account",
+        "currency": "USD"
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      const res = pm.response.json();
+
+      pm.test("Status 200 - Account created", () => {
+          pm.response.to.have.status(200);
+      });
+
+      pm.test("Response confirms creation", () => {
+          pm.expect(res.message).to.eql("Account created successfully");
+      });
+
+      pm.test("Account is active", () => {
+          pm.expect(res.account.status).to.eql("active");
+      });
+
+      pm.test("Account is returned with expected fields", () => {
+          pm.expect(res.account).to.be.an("object");
+          pm.expect(res.account.id).to.be.a("string");
+          pm.expect(res.account.name).to.be.a("string");
+          pm.expect(res.account.currency).to.be.a("string");
+          pm.expect(res.account.status).to.be.a("string");
+          pm.expect(res.account.created_at).to.be.a("string");
+      });
+    language: text/javascript
+examples: .resources/Create Account.resources/examples
+order: 2909471220171813

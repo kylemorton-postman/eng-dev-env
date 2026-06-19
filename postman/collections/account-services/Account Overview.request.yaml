@@ -1,11 +1,20 @@
 $kind: http-request
 description: Overview
-url: "{{baseUrl}}/accounts/:accountNumber/overview"
+url: ://{{baseUrl}}/accounts/:accountNumber/overview
 method: GET
 headers:
   - key: x-mock-response-code
     value: "200"
-    $type: integer
+    $type: |-
+      {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "integer",
+            "default": "<integer>"
+          }
+        }
+      }
   - key: Content-Type
     value: application/json
   - key: Accept
@@ -19,7 +28,8 @@ pathVariables:
         "type": "object",
         "properties": {
           "value": {
-            "type": "string"
+            "type": "string",
+            "default": "<string>"
           }
         },
         "required": [

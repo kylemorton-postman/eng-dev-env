@@ -1,19 +1,22 @@
 $kind: http-example
 request:
-  url: "{{baseUrl}}/accounts/:accountNumber/statement/latest"
+  url: ://{{baseUrl}}/accounts/:accountNumber/statement/latest
   method: GET
   headers:
     x-mock-response-code: "200"
     Accept: application/json
   pathVariables:
     accountNumber: ACC_867-5309
+  body:
+    type: text
+    content: ""
 response:
   statusCode: 200
   statusText: OK
   headers:
     Content-Type: application/json
   body:
-    type: json
+    type: text
     content: |-
       {
         "balance": {
@@ -111,6 +114,9 @@ response:
                 "type": "number"
               }
             }
+          },
+          "currency": {
+            "type": "string"
           },
           "money": {
             "type": "object",
