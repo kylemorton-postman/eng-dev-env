@@ -487,18 +487,7 @@ paths:
           type: string
         example: '{{accountNumber}}'
 security:
-  - bearerAuth: []
-
-components:
-  securitySchemes:
-    bearerAuth:
-      type: http
-      scheme: bearer
-      bearerFormat: JWT
-
-security:
-  - bearerAuth: []
-
+- bearerAuth: []
 components:
   securitySchemes:
     bearerAuth:
