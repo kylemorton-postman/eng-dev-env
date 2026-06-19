@@ -1,0 +1,30 @@
+name: API CI — governance + tests
+
+on:
+  push:
+    branches: [main, dev, my-change]
+  pull_request:
+    branches: [main, dev]
+
+jobs:
+  governance-lint:
+    name: Governance lint (Spectral)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Spectral
+        run: npm install -g @stoplight/spectral-cli
+      - name: Lint OpenAPI spec against governance rules
+        run: spectral lint index.yaml --fail-severity error
+
+  functional-tests:
+    name: Functional tests (Postman CLI)
+    needs: governance-lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run account-services collection
+        uses: postmanlabs/postman-cli-action@v1
+        with:
+          api-key: ${{ secrets.POSTMANAPIKEY }}
+          command: 'collection run 54544576-f708aed2-98ba-43cb-b248-3a716e07ff65 --environment 54544576-2ca05cd8-651c-4434-b235-a7badbbbb8ae'
