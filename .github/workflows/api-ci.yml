@@ -8,14 +8,15 @@ on:
 
 jobs:
   governance-lint:
-    name: Governance lint (Spectral)
+    name: Governance lint (Postman)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Install Spectral
-        run: npm install -g @stoplight/spectral-cli
-      - name: Lint OpenAPI spec against governance rules
-        run: spectral lint index.yaml --fail-severity error
+      - name: Lint spec against Postman governance rules
+        uses: postmanlabs/postman-cli-action@v1
+        with:
+          api-key: ${{ secrets.POSTMANAPIKEY }}
+          command: 'spec lint index.yaml --fail-severity ERROR'
 
   functional-tests:
     name: Functional tests (Postman CLI)
