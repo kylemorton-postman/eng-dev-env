@@ -1,4 +1,4 @@
-name: mock (TEST)
+name: mock-test
 values:
   - key: baseUrl
     value: 'https://3639d6f2-1f33-4de5-ac21-54203445b6ce.mock.pstmn.io'
