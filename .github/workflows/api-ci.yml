@@ -28,4 +28,4 @@ jobs:
         uses: postmanlabs/postman-cli-action@v1
         with:
           api-key: ${{ secrets.POSTMANAPIKEY }}
-          command: 'collection run 54544576-f708aed2-98ba-43cb-b248-3a716e07ff65 --environment 54544576-2ca05cd8-651c-4434-b235-a7badbbbb8ae'
+          command: 'collection run 54544576-f708aed2-98ba-43cb-b248-3a716e07ff65 --environment "postman/environments/mock (TEST).environment.yaml"'
