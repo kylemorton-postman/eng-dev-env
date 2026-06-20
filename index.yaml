@@ -486,3 +486,5 @@ paths:
         schema:
           type: string
         example: '{{accountNumber}}'
+security:
+- bearerAuth: []
