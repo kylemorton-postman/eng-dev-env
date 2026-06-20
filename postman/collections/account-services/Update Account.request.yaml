@@ -1,6 +1,7 @@
 $kind: http-request
+name: Update Account
 description: Create
-url: ://{{baseUrl}}/accounts/:accountNumber/update
+url: "{{baseUrl}}/accounts/:accountNumber/update"
 method: PATCH
 headers:
   Content-Type: application/json

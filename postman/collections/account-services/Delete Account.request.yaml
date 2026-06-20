@@ -1,6 +1,7 @@
 $kind: http-request
+name: Delete Account
 description: Create
-url: ://{{baseUrl}}/accounts/:accountNumber/delete
+url: "{{baseUrl}}/accounts/:accountNumber/delete"
 method: DELETE
 headers:
   Content-Type: application/json

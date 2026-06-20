@@ -1,6 +1,7 @@
 $kind: http-request
+name: Latest Statement
 description: Latest
-url: ://{{baseUrl}}/accounts/:accountNumber/statement/latest
+url: "{{baseUrl}}/accounts/:accountNumber/statement/latest"
 method: GET
 headers:
   - key: x-mock-response-code

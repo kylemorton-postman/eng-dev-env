@@ -1,6 +1,7 @@
 $kind: http-request
+name: Account Overview
 description: Overview
-url: ://{{baseUrl}}/accounts/:accountNumber/overview
+url: "{{baseUrl}}/accounts/:accountNumber/overview"
 method: GET
 headers:
   - key: x-mock-response-code
@@ -22,7 +23,6 @@ headers:
 pathVariables:
   - key: accountNumber
     value: "{{accountNumber}}"
-    description: "(Required) "
     $type: |-
       {
         "type": "object",
