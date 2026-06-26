@@ -1,0 +1,18 @@
+$kind: http-request
+description: Create
+url: "{{baseUrl}}/accounts/:accountNumber/create"
+method: POST
+headers:
+  Content-Type: application/json
+  Accept: application/json
+pathVariables:
+  accountNumber: "{{accountNumber}}"
+body:
+  type: json
+  content: |-
+    {
+      "name": "string",
+      "currency": "string"
+    }
+examples: ./.resources/Create Account Copy.resources/examples
+order: 3000

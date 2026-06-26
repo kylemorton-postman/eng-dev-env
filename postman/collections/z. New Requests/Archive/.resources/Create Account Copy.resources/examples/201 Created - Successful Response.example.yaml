@@ -1,0 +1,35 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/accounts/:accountNumber/create"
+  method: POST
+  headers:
+    Content-Type: application/json
+    Accept: application/json
+  pathVariables:
+    accountNumber: "{{accountNumber}}"
+  body:
+    type: json
+    content: |-
+      {
+        "name": "string",
+        "currency": "string"
+      }
+response:
+  statusCode: 201
+  statusText: Created
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "message": "Account created successfully",
+        "account": {
+          "id": "ACC-001",
+          "name": "New Business Account",
+          "currency": "USD",
+          "status": "active",
+          "created_at": "2024-01-15T10:00:00Z"
+        }
+      }
+order: 1000

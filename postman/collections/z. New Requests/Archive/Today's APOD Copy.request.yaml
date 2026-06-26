@@ -1,0 +1,77 @@
+$kind: http-request
+description: |-
+  ## NASA Astronomy Picture of the Day (APOD)
+
+  Retrieves the **Astronomy Picture of the Day** from NASA's APOD API. Each day, NASA features a different image or photograph of our universe, accompanied by a brief explanation written by a professional astronomer. This endpoint returns the current day's APOD by default, or a specific date's entry when query parameters are provided.
+
+  ---
+
+  ## Authentication
+
+  This request uses a **NASA API key** for authentication, stored securely in the Postman Vault.
+
+  | Parameter | Value |
+  | --- | --- |
+  | API Key | `{{vault:api_key}}` |
+
+  The key is passed as a query parameter (`api_key`). You can obtain a free NASA API key at [https://api.nasa.gov](https://api.nasa.gov).
+
+  ---
+
+  ## Query Parameters
+
+  | Parameter | Required | Type | Description |
+  | --- | --- | --- | --- |
+  | `api_key` | ✅ Yes | string | Your NASA API key. Stored in vault as `vault:api_key`. |
+  | `date` | ❌ No | string | The date of the APOD image to retrieve in `YYYY-MM-DD` format. Defaults to today. Cannot be used with `count`. |
+  | `count` | ❌ No | integer | Returns a specified number of randomly chosen APOD entries. Cannot be used with `date` or `start_date`/`end_date`. |
+  | `start_date` | ❌ No | string | The start of a date range (`YYYY-MM-DD`). Must be used together with `end_date`. |
+  | `end_date` | ❌ No | string | The end of a date range (`YYYY-MM-DD`). Must be used together with `start_date`. |
+  | `hd` | ❌ No | boolean | If `true`, the response includes the URL for the high-definition version of the image (`hdurl`). |
+
+  ---
+
+  ## Response Fields
+
+  | Field | Type | Description |
+  | --- | --- | --- |
+  | `title` | string | The title of the Astronomy Picture of the Day. |
+  | `explanation` | string | A detailed explanation of the image, written by a professional astronomer. |
+  | `date` | string | The date of the APOD entry in `YYYY-MM-DD` format. |
+  | `url` | string | The URL of the image or video for the day. |
+  | `hdurl` | string | The URL of the high-definition image (if available and `hd=true`). |
+  | `media_type` | string | The type of media returned — either `"image"` or `"video"`. |
+  | `service_version` | string | The version of the APOD service (e.g., `"v1"`). |
+  | `copyright` | string | The copyright holder of the image, if applicable. May be absent for public domain images. |
+
+  ---
+
+  ## Example Response
+
+  ``` json
+  {
+    "title": "B93: A Dark Interstellar Ghost",
+    "explanation": "A ghost in the Milky Way...",
+    "date": "2026-02-20",
+    "url": "https://apod.nasa.gov/apod/image/2602/B93.jpg",
+    "hdurl": "https://apod.nasa.gov/apod/image/2602/B93_hd.jpg",
+    "media_type": "image",
+    "service_version": "v1",
+    "copyright": "Christian Bertincourt"
+  }
+
+   ```
+url: https://api.nasa.gov/planetary/apod?api_key={{vault:nasa_api_key}}
+method: GET
+queryParams:
+  api_key: "{{vault:nasa_api_key}}"
+scripts:
+  - type: afterResponse
+    code: |+
+      pm.test("Status code is 200", function () {
+          pm.response.to.have.status(200);
+      });
+
+    language: text/javascript
+examples: ./.resources/Today's APOD Copy.resources/examples
+order: 1000

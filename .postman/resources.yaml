@@ -1,8 +1,5 @@
 workspace:
   id: 35032893-adc8-4e03-8583-af50cb2ed8e3
-
-# Each entry here maps a local resource to one or more corresponding objects in Postman Cloud
-
 cloudResources:
   collections:
     ../postman/collections/z. New Requests: 54544576-77d83d50-675e-4113-be95-bf382151be5c
@@ -12,7 +9,6 @@ cloudResources:
     ../postman/environments/_localhost.environment.yaml: 54544576-9cd17e99-72a8-4b42-8ca8-4aa3041c2eef
   specs:
     ../index.yaml: 9913b47b-dafb-46b8-83a3-c8471d71b1d7
-
 localResources:
   specs:
     - ../index.yaml
