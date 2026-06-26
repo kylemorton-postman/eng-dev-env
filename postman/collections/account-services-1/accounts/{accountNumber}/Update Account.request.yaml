@@ -1,8 +1,7 @@
 $kind: http-request
-name: Delete Account
-description: Create
-url: "{{baseUrl}}/accounts/:accountNumber/delete"
-method: DELETE
+description: Update details for an account.
+url: "{{baseUrl}}/accounts/:accountNumber"
+method: PATCH
 headers:
   Content-Type: application/json
   Accept: application/json
@@ -14,8 +13,7 @@ pathVariables:
         "type": "object",
         "properties": {
           "value": {
-            "type": "string",
-            "default": "<string>"
+            "type": "string"
           }
         },
         "required": [
@@ -45,17 +43,5 @@ body:
         }
       }
     }
-scripts:
-  - type: afterResponse
-    code: |-
-      pm.test("Status 200 - Account deleted", () => {
-          pm.response.to.have.status(200);
-      });
-
-      pm.test("Response confirms deletion", () => {
-          const res = pm.response.json();
-          pm.expect(res.message).to.eql("Account deleted successfully");
-      });
-    language: text/javascript
-examples: ./.resources/Delete Account.resources/examples
-order: 4000
+examples: ./.resources/Update Account.resources/examples
+order: 3000

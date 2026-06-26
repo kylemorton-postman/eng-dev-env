@@ -1,0 +1,23 @@
+$kind: http-request
+description: Fetch the most recent statement for an account.
+url: "{{baseUrl}}/accounts/:accountNumber/statement"
+method: GET
+headers:
+  Accept: application/json
+pathVariables:
+  - key: accountNumber
+    value: "{{accountNumber}}"
+    $type: |-
+      {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "value"
+        ]
+      }
+examples: .resources/Latest Statement.resources/examples
+order: 1400

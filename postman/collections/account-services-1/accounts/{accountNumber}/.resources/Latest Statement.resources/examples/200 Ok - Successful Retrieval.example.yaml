@@ -1,22 +1,18 @@
 $kind: http-example
 request:
-  url: ://{{baseUrl}}/accounts/:accountNumber/statement/latest
+  url: "{{baseUrl}}/accounts/:accountNumber/statement"
   method: GET
   headers:
-    x-mock-response-code: "200"
     Accept: application/json
   pathVariables:
-    accountNumber: ACC_867-5309
-  body:
-    type: text
-    content: ""
+    accountNumber: "{{accountNumber}}"
 response:
   statusCode: 200
   statusText: OK
   headers:
     Content-Type: application/json
   body:
-    type: text
+    type: json
     content: |-
       {
         "balance": {
@@ -62,41 +58,6 @@ response:
             "type": "withdrawal",
             "amount": 60.53,
             "balance": 638.96
-          },
-          {
-            "date": "Mon Jun 30 2025 23:13:28 GMT+0000 (Coordinated Universal Time)",
-            "description": "Grady - Breitenberg",
-            "type": "payment",
-            "amount": 259.87,
-            "balance": 527.26
-          },
-          {
-            "date": "Tue Jul 01 2025 10:36:30 GMT+0000 (Coordinated Universal Time)",
-            "description": "Gerhold Inc",
-            "type": "deposit",
-            "amount": 113.22,
-            "balance": 900.51
-          },
-          {
-            "date": "Mon Jun 30 2025 22:29:36 GMT+0000 (Coordinated Universal Time)",
-            "description": "Johns and Sons",
-            "type": "deposit",
-            "amount": 101.69,
-            "balance": 513.24
-          },
-          {
-            "date": "Mon Jun 30 2025 12:21:15 GMT+0000 (Coordinated Universal Time)",
-            "description": "Botsford, Schoen and Murazik",
-            "type": "withdrawal",
-            "amount": 874.79,
-            "balance": 854.91
-          },
-          {
-            "date": "Tue Jul 01 2025 03:01:56 GMT+0000 (Coordinated Universal Time)",
-            "description": "Anderson, Leannon and Bogan",
-            "type": "deposit",
-            "amount": 433.28,
-            "balance": 793.46
           }
         ]
       }
@@ -114,9 +75,6 @@ response:
                 "type": "number"
               }
             }
-          },
-          "currency": {
-            "type": "string"
           },
           "money": {
             "type": "object",

@@ -1,25 +1,18 @@
 $kind: http-example
 request:
-  url: ://{{baseUrl}}/accounts/:accountNumber/overview
+  url: "{{baseUrl}}/accounts/:accountNumber"
   method: GET
   headers:
-    x-mock-response-code: "200"
-    Content-Type: application/json
     Accept: application/json
   pathVariables:
-    - key: accountNumber
-      value: ACC_867-5309
-      description: "(Required) "
-  body:
-    type: json
-    content: "{}"
+    accountNumber: "{{accountNumber}}"
 response:
   statusCode: 200
   statusText: OK
   headers:
     Content-Type: application/json
   body:
-    type: text
+    type: json
     content: |-
       {
         "account": {

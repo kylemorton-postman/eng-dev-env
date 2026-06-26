@@ -1,4 +1,0 @@
-name: mock-test-account-services
-values:
-  - key: baseUrl
-    value: 'https://aea939e5-1d80-4e5d-88b1-3462bda79952.mock.pstmn.io'

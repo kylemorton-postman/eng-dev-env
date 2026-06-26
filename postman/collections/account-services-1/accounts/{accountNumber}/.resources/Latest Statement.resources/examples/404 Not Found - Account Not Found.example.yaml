@@ -1,28 +1,24 @@
 $kind: http-example
 request:
-  url: ://{{baseUrl}}/accounts/:accountNumber/statement/latest
+  url: "{{baseUrl}}/accounts/:accountNumber/statement"
   method: GET
   headers:
-    x-mock-response-code: "200"
     Accept: application/json
   pathVariables:
-    accountNumber: ACC_867-5309
-  body:
-    type: json
-    content: ""
+    accountNumber: "{{accountNumber}}"
 response:
-  statusCode: 401
-  statusText: Unauthorized
+  statusCode: 404
+  statusText: Not Found
   headers:
     Content-Type: application/json
   body:
-    type: text
+    type: json
     content: |-
       {
         "error": {
-          "code": "UNAUTHORIZED",
-          "message": "Authentication is required to access this resource.",
-          "details": "Bearer token is missing or has expired. Please re-authenticate and try again."
+          "code": "ACCOUNT_NOT_FOUND",
+          "message": "No account was found matching the provided account number.",
+          "details": "Account number does not exist or has been closed."
         }
       }
     $type: |-
@@ -40,9 +36,12 @@ response:
               },
               "details": {
                 "type": "string"
+              },
+              "referenceId": {
+                "type": "string"
               }
             }
           }
         }
       }
-order: 3000
+order: 4000

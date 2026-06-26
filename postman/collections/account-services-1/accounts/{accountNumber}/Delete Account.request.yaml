@@ -1,0 +1,23 @@
+$kind: http-request
+description: Delete an account.
+url: "{{baseUrl}}/accounts/:accountNumber"
+method: DELETE
+headers:
+  Accept: application/json
+pathVariables:
+  - key: accountNumber
+    value: "{{accountNumber}}"
+    $type: |-
+      {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "value"
+        ]
+      }
+examples: ./.resources/Delete Account.resources/examples
+order: 4000

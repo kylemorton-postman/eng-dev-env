@@ -1,0 +1,18 @@
+$kind: collection
+name: account-services
+description: |-
+  Core account management endpoints for the **account-services** API. All operations live under the `/accounts/{accountNumber}` resource.
+
+  ## Endpoints
+
+  | Method | Endpoint | Description |
+  | --- | --- | --- |
+  | `GET` | `/accounts/:accountNumber` | Retrieve a summary overview of an account |
+  | `PATCH` | `/accounts/:accountNumber` | Update details for an account |
+  | `DELETE` | `/accounts/:accountNumber` | Delete an account |
+  | `GET` | `/accounts/:accountNumber/statement` | Fetch the most recent statement |
+
+  ## Variables
+
+  - `{{baseUrl}}` — The base URL of the account-services API (configured in the active environment)
+  - `:accountNumber` — Path parameter identifying the target account (also available as the `accountNumber` environment variable)

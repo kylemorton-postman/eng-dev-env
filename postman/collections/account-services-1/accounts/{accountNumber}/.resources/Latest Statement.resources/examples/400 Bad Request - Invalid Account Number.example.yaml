@@ -1,29 +1,24 @@
 $kind: http-example
 request:
-  url: ://{{baseUrl}}/accounts/:accountNumber/statement/latest
+  url: "{{baseUrl}}/accounts/:accountNumber/statement"
   method: GET
   headers:
-    x-mock-response-code: "200"
     Accept: application/json
   pathVariables:
-    accountNumber: ACC_867-5309
-  body:
-    type: json
-    content: ""
+    accountNumber: "{{accountNumber}}"
 response:
-  statusCode: 500
-  statusText: Internal Server Error
+  statusCode: 400
+  statusText: Bad Request
   headers:
     Content-Type: application/json
   body:
-    type: text
+    type: json
     content: |-
       {
         "error": {
-          "code": "INTERNAL_SERVER_ERROR",
-          "message": "An unexpected error occurred while processing your request.",
-          "details": "The server encountered an internal error. Please try again later or contact support if the issue persists.",
-          "referenceId": "err_8f3a2c1d-4b7e-4f9a-b2d6-1c3e5f7a9b0d"
+          "code": "INVALID_ACCOUNT_NUMBER",
+          "message": "The account number provided is not in a valid format.",
+          "details": "Account number must be a 10-digit numeric string. Received: 'ABC123'."
         }
       }
     $type: |-
@@ -49,4 +44,4 @@ response:
           }
         }
       }
-order: 5000
+order: 2000

@@ -1,8 +1,0 @@
-$kind: collection
-variables:
-  accountNumber: ACC_867-5309
-  baseUrl: "{{baseUrl}}"
-auth:
-  - id: 7e3fcc29-5d06-4176-a8a8-9d382ba9c1b9
-    type: bearer
-    name: bearer auth

@@ -1,0 +1,6 @@
+name: account-services-mock
+values:
+  - key: accountNumber
+    value: ACC_8675309
+  - key: baseUrl
+    value: 'https://0d028d3a-2af2-46e8-b036-b96172e0ff56.mock.pstmn.io'

@@ -1,0 +1,23 @@
+$kind: http-request
+description: Retrieve a summary overview of an account.
+url: "{{baseUrl}}/accounts/:accountNumber"
+method: GET
+headers:
+  Accept: application/json
+pathVariables:
+  - key: accountNumber
+    value: "{{accountNumber}}"
+    $type: |-
+      {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "value"
+        ]
+      }
+examples: ./.resources/Account Overview.resources/examples
+order: 2000

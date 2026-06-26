@@ -1,12 +1,12 @@
 $kind: http-example
 request:
-  url: ://{{baseUrl}}/accounts/:accountNumber/update
+  url: "{{baseUrl}}/accounts/:accountNumber"
   method: PATCH
   headers:
     Content-Type: application/json
     Accept: application/json
   pathVariables:
-    accountNumber: ACC_867-5309
+    accountNumber: "{{accountNumber}}"
   body:
     type: json
     content: |-
@@ -21,7 +21,7 @@ response:
   headers:
     Content-Type: application/json
   body:
-    type: text
+    type: json
     content: |-
       {
         "account": {
