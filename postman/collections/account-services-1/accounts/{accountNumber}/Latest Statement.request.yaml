@@ -1,4 +1,5 @@
 $kind: http-request
+name: Latest Statement
 description: Fetch the most recent statement for an account.
 url: "{{baseUrl}}/accounts/:accountNumber/statement"
 method: GET
@@ -19,5 +20,12 @@ pathVariables:
           "value"
         ]
       }
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test("Status code is 200", function () {
+          pm.response.to.have.status(200);
+      });
+    language: text/javascript
 examples: .resources/Latest Statement.resources/examples
 order: 1400
