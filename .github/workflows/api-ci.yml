@@ -1,11 +1,9 @@
 name: API CI — governance + tests
-
 on:
   push:
     branches: [main, dev, my-change]
   pull_request:
     branches: [main, dev]
-
 jobs:
   governance-lint:
     name: Governance lint (Postman)
@@ -17,7 +15,6 @@ jobs:
         with:
           api-key: ${{ secrets.POSTMANAPIKEY }}
           command: 'spec lint index.yaml --fail-severity ERROR'
-
   functional-tests:
     name: Functional tests (Postman CLI)
     needs: governance-lint
@@ -28,4 +25,4 @@ jobs:
         uses: postmanlabs/postman-cli-action@v1
         with:
           api-key: ${{ secrets.POSTMANAPIKEY }}
-          command: 'collection run 54544576-857873a8-0ecd-46b9-a7bc-abde03343d2f --environment postman/environments/mock-test-account-services.environment.yaml'
+          command: 'collection run 54544576-37fecac3-b6b4-4c3e-b2ab-89f3fca84256 --environment postman/environments/mock-test-account-services.environment.yaml'
