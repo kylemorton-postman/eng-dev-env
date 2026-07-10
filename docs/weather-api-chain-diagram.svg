@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="420" viewBox="0 0 900 420" font-family="Arial, system-ui, sans-serif">
+
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#555" />
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="420" fill="#f0f4f8" />
+
+  <!-- Title -->
+  <text x="450" y="30" text-anchor="middle" dominant-baseline="middle" font-size="17" font-weight="bold" fill="#1a1a2e">Weather API Chain — Conditional Workflow</text>
+
+  <!-- ===================== -->
+  <!-- Box 1: SF Weather     -->
+  <!-- ===================== -->
+  <!-- "Always runs first" badge -->
+  <rect x="75" y="46" width="110" height="18" rx="9" fill="#ddd" />
+  <text x="130" y="55" text-anchor="middle" dominant-baseline="middle" font-size="10" fill="#444">Always runs first</text>
+
+  <!-- SF box -->
+  <rect x="60" y="68" width="170" height="64" rx="10" fill="#2E86C1" />
+  <text x="145" y="88" text-anchor="middle" dominant-baseline="middle" font-size="13" font-weight="bold" fill="white">GET San Francisco</text>
+  <text x="145" y="103" text-anchor="middle" dominant-baseline="middle" font-size="13" font-weight="bold" fill="white">Weather</text>
+  <text x="145" y="118" text-anchor="middle" dominant-baseline="middle" font-size="11" fill="#cce5f7">→ stores sfTemp</text>
+  <text x="145" y="131" text-anchor="middle" dominant-baseline="middle" font-size="11" fill="#cce5f7">→ reads tempThreshold</text>
+
+  <!-- ========================= -->
+  <!-- Arrow: Box 1 → Diamond   -->
+  <!-- ========================= -->
+  <line x1="230" y1="100" x2="318" y2="100" stroke="#555" stroke-width="2" marker-end="url(#arrowhead)" />
+
+  <!-- ========================= -->
+  <!-- Decision Diamond          -->
+  <!-- x=370, y=100, ~100w×60h  -->
+  <!-- ========================= -->
+  <!-- Diamond is a rotated rect: center (370,100), half-width=55, half-height=38 -->
+  <polygon points="370,62 425,100 370,138 315,100" fill="#F7DC6F" stroke="#B7950B" stroke-width="2" />
+  <text x="370" y="94" text-anchor="middle" dominant-baseline="middle" font-size="12" fill="#333">sfTemp ≥</text>
+  <text x="370" y="109" text-anchor="middle" dominant-baseline="middle" font-size="12" fill="#333">tempThreshold?</text>
+
+  <!-- ================================= -->
+  <!-- Arrow: Diamond → Bangalore (YES)  -->
+  <!-- Diamond right tip: (425,100)      -->
+  <!-- Bangalore box center: (735,92)    -->
+  <!-- ================================= -->
+  <line x1="425" y1="100" x2="648" y2="80" stroke="#555" stroke-width="2" marker-end="url(#arrowhead)" />
+  <text x="530" y="78" text-anchor="middle" dominant-baseline="middle" font-size="11" fill="#1A8754" font-weight="bold">YES / ≥ threshold</text>
+
+  <!-- ================================ -->
+  <!-- Arrow: Diamond → London (NO)     -->
+  <!-- Diamond bottom tip: (370,138)    -->
+  <!-- London box center: (735,232)     -->
+  <!-- ================================ -->
+  <line x1="425" y1="100" x2="648" y2="218" stroke="#555" stroke-width="2" marker-end="url(#arrowhead)" />
+  <text x="530" y="175" text-anchor="middle" dominant-baseline="middle" font-size="11" fill="#7D3C98" font-weight="bold">NO / &lt; threshold</text>
+
+  <!-- ========================== -->
+  <!-- Box 2: Bangalore Weather   -->
+  <!-- x=650, y=60               -->
+  <!-- ========================== -->
+  <rect x="650" y="60" width="170" height="64" rx="10" fill="#1A8754" />
+  <text x="735" y="82" text-anchor="middle" dominant-baseline="middle" font-size="13" font-weight="bold" fill="white">GET Bangalore</text>
+  <text x="735" y="97" text-anchor="middle" dominant-baseline="middle" font-size="13" font-weight="bold" fill="white">Weather</text>
+  <text x="735" y="114" text-anchor="middle" dominant-baseline="middle" font-size="11" fill="#b7e4c7">runs if sfTemp ≥ threshold</text>
+
+  <!-- ========================= -->
+  <!-- Box 3: London Weather     -->
+  <!-- x=650, y=200             -->
+  <!-- ========================= -->
+  <rect x="650" y="200" width="170" height="64" rx="10" fill="#7D3C98" />
+  <text x="735" y="222" text-anchor="middle" dominant-baseline="middle" font-size="13" font-weight="bold" fill="white">GET London</text>
+  <text x="735" y="237" text-anchor="middle" dominant-baseline="middle" font-size="13" font-weight="bold" fill="white">Weather</text>
+  <text x="735" y="254" text-anchor="middle" dominant-baseline="middle" font-size="11" fill="#d7b8f3">runs if sfTemp &lt; threshold</text>
+
+  <!-- ================================== -->
+  <!-- Arrow: Bangalore → Workflow Complete -->
+  <!-- Bangalore bottom: (735, 124)       -->
+  <!-- WF Complete center: (450, 362)     -->
+  <!-- ================================== -->
+  <line x1="735" y1="124" x2="538" y2="348" stroke="#555" stroke-width="2" marker-end="url(#arrowhead)" />
+
+  <!-- ================================== -->
+  <!-- Arrow: London → Workflow Complete  -->
+  <!-- London bottom: (735, 264)          -->
+  <!-- WF Complete right: (535, 362)      -->
+  <!-- ================================== -->
+  <line x1="735" y1="264" x2="538" y2="362" stroke="#555" stroke-width="2" marker-end="url(#arrowhead)" />
+
+  <!-- ========================== -->
+  <!-- Box 4: Workflow Complete   -->
+  <!-- centered at x=450, y=330  -->
+  <!-- ========================== -->
+  <!-- "Always runs last" badge -->
+  <rect x="345" y="308" width="110" height="18" rx="9" fill="#ddd" />
+  <text x="400" y="317" text-anchor="middle" dominant-baseline="middle" font-size="10" fill="#444">Always runs last</text>
+
+  <!-- WF Complete box -->
+  <rect x="315" y="330" width="170" height="64" rx="10" fill="#E67E22" />
+  <text x="400" y="349" text-anchor="middle" dominant-baseline="middle" font-size="13" font-weight="bold" fill="white">Workflow Complete</text>
+  <text x="400" y="365" text-anchor="middle" dominant-baseline="middle" font-size="11" fill="#fde8cc">validates sfTemp + chosenCity</text>
+  <text x="400" y="380" text-anchor="middle" dominant-baseline="middle" font-size="11" fill="#fde8cc">setNextRequest(null)</text>
+
+  <!-- Footer -->
+  <text x="450" y="410" text-anchor="middle" dominant-baseline="middle" font-size="10" fill="#999">Open-Meteo API · Routing controlled by setNextRequest() · Environment: weather-api-chain (PROD)</text>
+
+</svg>
