@@ -14,5 +14,5 @@ body:
       "name": "string",
       "currency": "string"
     }
-examples: ./.resources/Create Account.resources/examples
-order: 3000
+examples: .resources/Create Account.resources/examples
+order: 1597690424066693
