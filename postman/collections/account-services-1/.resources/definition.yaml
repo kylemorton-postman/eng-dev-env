@@ -15,4 +15,5 @@ description: |-
   ## Variables
 
   - `{{baseUrl}}` — The base URL of the account-services API (configured in the active environment)
+      
   - `:accountNumber` — Path parameter identifying the target account (also available as the `accountNumber` environment variable)
