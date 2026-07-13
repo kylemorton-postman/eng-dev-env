@@ -2,19 +2,29 @@ openapi: 3.0.0
 info:
   title: account-services
   version: 1.0.0
-  description: ''
+  description: |-
+    Core account management endpoints for the **account-services** API. All operations live under the `/accounts/{accountNumber}` resource.
+
+    ## Endpoints
+
+    | Method | Endpoint | Description |
+    | --- | --- | --- |
+    | `GET` | `/accounts/:accountNumber` | Retrieve a summary overview of an account |
+    | `PATCH` | `/accounts/:accountNumber` | Update details for an account |
+    | `DELETE` | `/accounts/:accountNumber` | Delete an account |
+    | `GET` | `/accounts/:accountNumber/statement` | Fetch the most recent statement |
+
+    ## Variables
+
+    - `{{baseUrl}}` — The base URL of the account-services API (configured in the active environment)
+        
+    - `:accountNumber` — Path parameter identifying the target account (also available as the `accountNumber` environment variable)
 servers:
   - url: '{{baseUrl}}'
 paths:
-  /accounts/{accountNumber}/statement/latest:
+  '/accounts/{accountNumber}/statement':
     get:
       summary: Latest Statement
-      parameters:
-        - name: x-mock-response-code
-          in: header
-          schema:
-            type: integer
-          example: 200
       responses:
         '200':
           description: 200 Ok - Successful Retrieval
@@ -60,76 +70,31 @@ paths:
                   in: 167.49
                   out: 730.71
                 transactions:
-                  - date: >-
-                      Mon Jun 30 2025 15:36:11 GMT+0000 (Coordinated Universal
-                      Time)
+                  - date: 'Mon Jun 30 2025 15:36:11 GMT+0000 (Coordinated Universal Time)'
                     description: Schoen Inc
                     type: invoice
                     amount: 253.14
                     balance: 451.58
-                  - date: >-
-                      Mon Jun 30 2025 13:14:47 GMT+0000 (Coordinated Universal
-                      Time)
+                  - date: 'Mon Jun 30 2025 13:14:47 GMT+0000 (Coordinated Universal Time)'
                     description: Zulauf - Satterfield
                     type: invoice
                     amount: 373.16
                     balance: 3.16
-                  - date: >-
-                      Tue Jul 01 2025 03:13:33 GMT+0000 (Coordinated Universal
-                      Time)
+                  - date: 'Tue Jul 01 2025 03:13:33 GMT+0000 (Coordinated Universal Time)'
                     description: Towne and Sons
                     type: withdrawal
                     amount: 463.67
                     balance: 279.5
-                  - date: >-
-                      Tue Jul 01 2025 02:51:14 GMT+0000 (Coordinated Universal
-                      Time)
-                    description: Hansen, Pfannerstill and Rath
+                  - date: 'Tue Jul 01 2025 02:51:14 GMT+0000 (Coordinated Universal Time)'
+                    description: 'Hansen, Pfannerstill and Rath'
                     type: payment
                     amount: 87.25
                     balance: 525.04
-                  - date: >-
-                      Tue Jul 01 2025 03:23:16 GMT+0000 (Coordinated Universal
-                      Time)
+                  - date: 'Tue Jul 01 2025 03:23:16 GMT+0000 (Coordinated Universal Time)'
                     description: Carter LLC
                     type: withdrawal
                     amount: 60.53
                     balance: 638.96
-                  - date: >-
-                      Mon Jun 30 2025 23:13:28 GMT+0000 (Coordinated Universal
-                      Time)
-                    description: Grady - Breitenberg
-                    type: payment
-                    amount: 259.87
-                    balance: 527.26
-                  - date: >-
-                      Tue Jul 01 2025 10:36:30 GMT+0000 (Coordinated Universal
-                      Time)
-                    description: Gerhold Inc
-                    type: deposit
-                    amount: 113.22
-                    balance: 900.51
-                  - date: >-
-                      Mon Jun 30 2025 22:29:36 GMT+0000 (Coordinated Universal
-                      Time)
-                    description: Johns and Sons
-                    type: deposit
-                    amount: 101.69
-                    balance: 513.24
-                  - date: >-
-                      Mon Jun 30 2025 12:21:15 GMT+0000 (Coordinated Universal
-                      Time)
-                    description: Botsford, Schoen and Murazik
-                    type: withdrawal
-                    amount: 874.79
-                    balance: 854.91
-                  - date: >-
-                      Tue Jul 01 2025 03:01:56 GMT+0000 (Coordinated Universal
-                      Time)
-                    description: Anderson, Leannon and Bogan
-                    type: deposit
-                    amount: 433.28
-                    balance: 793.46
         '400':
           description: 400 Bad Request - Invalid Account Number
           content:
@@ -146,13 +111,13 @@ paths:
                         type: string
                       details:
                         type: string
+                      referenceId:
+                        type: string
               example:
                 error:
                   code: INVALID_ACCOUNT_NUMBER
                   message: The account number provided is not in a valid format.
-                  details: >-
-                    Account number must be a 10-digit numeric string. Received:
-                    'ABC123'.
+                  details: 'Account number must be a 10-digit numeric string. Received: ''ABC123''.'
         '401':
           description: 401 Unauthorized - Missing or Invalid Token
           content:
@@ -169,13 +134,13 @@ paths:
                         type: string
                       details:
                         type: string
+                      referenceId:
+                        type: string
               example:
                 error:
                   code: UNAUTHORIZED
                   message: Authentication is required to access this resource.
-                  details: >-
-                    Bearer token is missing or has expired. Please
-                    re-authenticate and try again.
+                  details: Bearer token is missing or has expired. Please re-authenticate and try again.
         '404':
           description: 404 Not Found - Account Not Found
           content:
@@ -191,6 +156,8 @@ paths:
                       message:
                         type: string
                       details:
+                        type: string
+                      referenceId:
                         type: string
               example:
                 error:
@@ -219,13 +186,12 @@ paths:
                 error:
                   code: INTERNAL_SERVER_ERROR
                   message: An unexpected error occurred while processing your request.
-                  details: >-
-                    The server encountered an internal error. Please try again
-                    later or contact support if the issue persists.
+                  details: The server encountered an internal error. Please try again later or contact support if the issue persists.
                   referenceId: err_8f3a2c1d-4b7e-4f9a-b2d6-1c3e5f7a9b0d
       tags:
         - accounts
-      description: Latest
+        - '{accountNumber}'
+      description: Fetch the most recent statement for an account.
     parameters:
       - name: accountNumber
         in: path
@@ -233,15 +199,9 @@ paths:
         schema:
           type: string
         example: '{{accountNumber}}'
-  /accounts/{accountNumber}/overview:
+  '/accounts/{accountNumber}':
     get:
       summary: Account Overview
-      parameters:
-        - name: x-mock-response-code
-          in: header
-          schema:
-            type: integer
-          example: 200
       responses:
         '200':
           description: 200 Ok - Successful Response
@@ -314,9 +274,7 @@ paths:
                 balance:
                   current: 118.51
                   available: 118.51
-                  as_of: >-
-                    Tue Jul 01 2025 10:36:30 GMT+0000 (Coordinated Universal
-                    Time)
+                  as_of: 'Tue Jul 01 2025 10:36:30 GMT+0000 (Coordinated Universal Time)'
                 summary:
                   total_transactions: 10
                   invoices: 2
@@ -328,46 +286,34 @@ paths:
                   out: 730.71
                   net: -563.22
                 recent_transactions:
-                  - date: >-
-                      Tue Jul 01 2025 10:36:30 GMT+0000 (Coordinated Universal
-                      Time)
+                  - date: 'Tue Jul 01 2025 10:36:30 GMT+0000 (Coordinated Universal Time)'
                     description: Gerhold Inc
                     type: deposit
                     amount: 113.22
-                  - date: >-
-                      Tue Jul 01 2025 03:23:16 GMT+0000 (Coordinated Universal
-                      Time)
+                  - date: 'Tue Jul 01 2025 03:23:16 GMT+0000 (Coordinated Universal Time)'
                     description: Carter LLC
                     type: withdrawal
                     amount: 60.53
-                  - date: >-
-                      Tue Jul 01 2025 03:13:33 GMT+0000 (Coordinated Universal
-                      Time)
+                  - date: 'Tue Jul 01 2025 03:13:33 GMT+0000 (Coordinated Universal Time)'
                     description: Towne and Sons
                     type: withdrawal
                     amount: 463.67
       tags:
         - accounts
-      description: Overview
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
+        - '{accountNumber}'
+      description: Retrieve a summary overview of an account.
     parameters:
       - name: accountNumber
         in: path
         required: true
-        description: '(Required) '
         schema:
           type: string
         example: '{{accountNumber}}'
-  /accounts/{accountNumber}/update:
     patch:
       summary: Update Account
       responses:
         '200':
-          description: 200 Okay - Update Account Successful
+          description: 200 Ok - Account Updated
           content:
             application/json:
               schema:
@@ -394,13 +340,12 @@ paths:
                   name: New Business Account Name
                   currency: USD
                   status: active
-                  updated_at: >-
-                    Tue Jul 01 2025 10:36:30 GMT+0000 (Coordinated Universal
-                    Time)
+                  updated_at: 'Tue Jul 01 2025 10:36:30 GMT+0000 (Coordinated Universal Time)'
                 message: Account updated successfully
       tags:
         - accounts
-      description: Create
+        - '{accountNumber}'
+      description: Update details for an account.
       requestBody:
         content:
           application/json:
@@ -417,19 +362,11 @@ paths:
               name: New Business Account Name
               currency: USD
               status: active
-    parameters:
-      - name: accountNumber
-        in: path
-        required: true
-        schema:
-          type: string
-        example: '{{accountNumber}}'
-  /accounts/{accountNumber}/delete:
     delete:
       summary: Delete Account
       responses:
         '200':
-          description: 200 Okay - Delete Account Successful
+          description: 200 Ok - Account Deleted
           content:
             application/json:
               schema:
@@ -456,35 +393,11 @@ paths:
                   name: New Business Account Name
                   currency: USD
                   status: active
-                  updated_at: >-
-                    Tue Jul 01 2025 10:36:30 GMT+0000 (Coordinated Universal
-                    Time)
+                  updated_at: 'Tue Jul 01 2025 10:36:30 GMT+0000 (Coordinated Universal Time)'
                 message: Account deleted successfully
       tags:
         - accounts
-      description: Create
-      requestBody:
-        content:
-          application/json:
-            schema:
-          type: object
-              properties:
-                name:
-                  type: string
-                currency:
-                  type: string
-                status:
-                  type: string
-            example:
-              name: New Business Account Name
-              currency: USD
-              status: active
-    parameters:
-      - name: accountNumber
-        in: path
-        required: true
-        schema:
-          type: string
-        example: '{{accountNumber}}'
+        - '{accountNumber}'
+      description: Delete an account.
 security:
-- bearerAuth: []
+  - bearerAuth: []
